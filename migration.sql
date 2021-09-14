@@ -7,13 +7,13 @@ DROP TABLE IF EXISTS users;
 
 
 CREATE TABLE users (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    username VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    gender VARCHAR(255) NOT NULL,
-    birth_date date NOT NULL,
-    PRIMARY KEY (id)
+                       id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+                       username VARCHAR(255) NOT NULL UNIQUE,
+                       password VARCHAR(255) NOT NULL,
+                       email VARCHAR(255) NOT NULL UNIQUE,
+                       gender VARCHAR(255),
+                       birth_date date,
+                       PRIMARY KEY (id)
 );
 
 CREATE TABLE ads (
