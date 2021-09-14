@@ -11,8 +11,8 @@ CREATE TABLE users (
     username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
-    gender VARCHAR(255) NOT NULL,
-    birth_date date NOT NULL,
+    gender VARCHAR(255) ,
+    birth_date date,
     PRIMARY KEY (id)
 );
 
@@ -22,8 +22,8 @@ CREATE TABLE ads (
     title VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     date_posted date,
-    city varchar(255) NOT NULL,
-    state varchar(255) NOT NULL,
+    city varchar(255),
+    state varchar(255),
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users(id)
         ON DELETE CASCADE
@@ -40,5 +40,4 @@ CREATE TABLE ad_categories (
     category_id INT UNSIGNED NOT NULL,
     FOREIGN KEY (ad_id) REFERENCES ads(id),
     FOREIGN KEY (category_id) REFERENCES categories(id)
-
 );
