@@ -18,8 +18,11 @@
 <div class="container">
 
     <div class="col-md-6">
-        <h3>${ads.title}</h3>
+        <h1>${ads.title}</h1>
         <p>${ads.description}</p>
+        <p>posted by: ${user.username}</p>
+        <p>email: ${user.email}</p>
+
     </div>
 
 </div>
