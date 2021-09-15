@@ -11,7 +11,7 @@ CREATE TABLE users (
     username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
-    gender VARCHAR(255) ,
+    gender VARCHAR(255),
     birth_date date,
     PRIMARY KEY (id)
 );
