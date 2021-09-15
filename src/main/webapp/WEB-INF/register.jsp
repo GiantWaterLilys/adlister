@@ -29,5 +29,6 @@
             <input type="submit" class="btn btn-primary btn-block">
         </form>
     </div>
+    <jsp:include page="partials/messages.jsp" />
 </body>
 </html>
