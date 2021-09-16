@@ -45,13 +45,15 @@ public class RegisterServlet extends HttpServlet {
         boolean invalidEmail = Validate.emailIsNotValid(email);
         boolean invalidPassword = Validate.passwordIsNotValid(password);
         boolean passwordsDontMatch = (!password.equals(passwordConfirmation));
+        boolean emailIsNotUnique = DaoFactory.getUsersDao().findByEmail(email) != null;
 
 
         // validate input
         boolean inputHasErrors = invalidUser
             || invalidEmail
             || invalidPassword
-            || passwordsDontMatch;
+            || passwordsDontMatch
+            || emailIsNotUnique;
 
         if (inputHasErrors) {
 //            saves the username and email in a register object to the session
@@ -59,6 +61,7 @@ public class RegisterServlet extends HttpServlet {
 
             request.getSession().setAttribute("invalidUser", invalidUser);
             request.getSession().setAttribute("invalidEmail", invalidEmail);
+            request.getSession().setAttribute("emailIsNotUnique", emailIsNotUnique);
             request.getSession().setAttribute("invalidPassword", invalidPassword);
             request.getSession().setAttribute("passwordsDontMatch", passwordsDontMatch);
 

@@ -9,5 +9,6 @@ public interface Users {
     User findByUsername(String username);
     Long insert(User user);
     User findById(Long id);
+    User findByEmail(String email);
     void updateProfile(User user, Long id);
 }

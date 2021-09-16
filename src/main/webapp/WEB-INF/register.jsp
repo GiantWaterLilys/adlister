@@ -28,6 +28,11 @@
                         <div style="color: red">Email is not valid</div>
                     </c:when>
                 </c:choose>
+                <c:choose>
+                    <c:when test="${emailIsNotUnique}">
+                        <div style="color: red">Email is already associated with another account</div>
+                    </c:when>
+                </c:choose>
                 <input id="email" name="email" class="form-control" type="text" value="${register.getEmail()}">
             </div>
             <div class="form-group">
