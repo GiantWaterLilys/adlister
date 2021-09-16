@@ -1,5 +1,6 @@
 package com.codeup.adlister.controllers;
 import com.codeup.adlister.dao.DaoFactory;
+import com.codeup.adlister.models.Register;
 import com.codeup.adlister.models.User;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,12 @@ import java.io.IOException;
 @WebServlet(name = "controllers.RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Register blankRegister = new Register();
+        if (request.getSession().getAttribute("register") == null){
+            request.getSession().setAttribute("register", blankRegister);
+        }
+        Register register = (Register) request.getSession().getAttribute("register");
+        request.setAttribute("register", register);
         if(request.getParameter("error") != null){
             request.setAttribute("wasAnError", "error");
         }
@@ -35,6 +42,9 @@ public class RegisterServlet extends HttpServlet {
             || (! password.equals(passwordConfirmation));
 
         if (inputHasErrors) {
+            Register register = new Register(username, email);
+
+            request.getSession().setAttribute("register", register);
             response.sendRedirect("/register?error=error");
             return;
         }
