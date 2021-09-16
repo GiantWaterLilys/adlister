@@ -12,7 +12,7 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="${pageContext.request.contextPath}/search">&#128269</a></li>
-            <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+            <li><a href="${pageContext.request.contextPath}/login?from=${requestScope['javax.servlet.forward.request_uri']}">Login</a></li>
             <li><a href="${pageContext.request.contextPath}/register">Register</a></li>
         </ul>
     </div><!-- /.navbar-collapse -->
@@ -31,7 +31,9 @@
         <ul class="nav navbar-nav navbar-right">
             <li><a href="${pageContext.request.contextPath}/search">&#128269</a></li>
             <li><a href="${pageContext.request.contextPath}/my_ads">My Ads</a></li>
+            <li><a href="${pageContext.request.contextPath}/ads/create">Create An Ad</a></li>
             <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+            <li><a href="${pageContext.request.contextPath}/profile">My Profile</a></li>
         </ul>
     </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
