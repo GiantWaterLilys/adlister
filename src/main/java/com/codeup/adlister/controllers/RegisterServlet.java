@@ -14,7 +14,11 @@ import java.io.IOException;
 @WebServlet(name = "controllers.RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(request.getParameter("error") != null){
+            request.setAttribute("wasAnError", "error");
+        }
         request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -31,8 +35,7 @@ public class RegisterServlet extends HttpServlet {
             || (! password.equals(passwordConfirmation));
 
         if (inputHasErrors) {
-            JOptionPane.showMessageDialog(null, "Please fill out all the requested information to register!");
-            response.sendRedirect("/register");
+            response.sendRedirect("/register?error=error");
             return;
         }
 

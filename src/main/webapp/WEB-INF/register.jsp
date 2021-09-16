@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -26,6 +27,11 @@
                 <label for="confirm_password">Confirm Password</label>
                 <input id="confirm_password" name="confirm_password" class="form-control" type="password">
             </div>
+            <c:choose>
+                <c:when test="${wasAnError != null}">
+                    <div style="color: red">One or more of the required fields was empty!</div>
+                </c:when>
+            </c:choose>
             <input type="submit" class="btn btn-primary btn-block">
         </form>
     </div>
