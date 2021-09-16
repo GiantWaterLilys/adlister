@@ -15,12 +15,18 @@ import java.io.IOException;
 @WebServlet(name = "controllers.RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        creates a blank register form that fills the forms in with empty strings
         Register blankRegister = new Register();
+
+//        sets register attribute to a blank register object if its the first time seeing this form
         if (request.getSession().getAttribute("register") == null){
             request.getSession().setAttribute("register", blankRegister);
+        }else{
+//            sets the register attribute to the object that's saved in the session during the post request
+            Register register = (Register) request.getSession().getAttribute("register");
+            request.setAttribute("register", register);
         }
-        Register register = (Register) request.getSession().getAttribute("register");
-        request.setAttribute("register", register);
+
         if(request.getParameter("error") != null){
             request.setAttribute("wasAnError", "error");
         }
@@ -42,6 +48,7 @@ public class RegisterServlet extends HttpServlet {
             || (! password.equals(passwordConfirmation));
 
         if (inputHasErrors) {
+//            saves the username and email in a register object to the session
             Register register = new Register(username, email);
 
             request.getSession().setAttribute("register", register);
