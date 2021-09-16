@@ -2,6 +2,7 @@ package com.codeup.adlister.controllers;
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.Register;
 import com.codeup.adlister.models.User;
+import com.codeup.adlister.util.Validate;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,7 +45,7 @@ public class RegisterServlet extends HttpServlet {
         // validate input
         boolean inputHasErrors = username.isEmpty()
             || email.isEmpty()
-            || password.isEmpty()
+            || Validate.password(password)
             || (! password.equals(passwordConfirmation));
 
         if (inputHasErrors) {
