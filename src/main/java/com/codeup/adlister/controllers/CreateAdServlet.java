@@ -33,6 +33,11 @@ public class CreateAdServlet extends HttpServlet {
             response.sendRedirect("/login");
             return;
         }
+
+        if(request.getParameter("error") != null){
+            request.setAttribute("wasAnError", "error");
+        }
+
         request.getRequestDispatcher("/WEB-INF/ads/create.jsp")
             .forward(request, response);
     }
@@ -48,7 +53,7 @@ public class CreateAdServlet extends HttpServlet {
         if(inputHasErrors){
             AdForm ad = new AdForm(title, description);
             request.getSession().setAttribute("ad", ad);
-            response.sendRedirect("/ads/create");
+            response.sendRedirect("/ads/create?error=error");
             return;
         }
 
