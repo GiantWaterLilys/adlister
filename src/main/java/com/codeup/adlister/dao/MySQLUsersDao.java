@@ -57,6 +57,21 @@ public class MySQLUsersDao implements Users {
         }
     }
 
+    public void updateProfile(User user, Long id)  {
+        String query = "UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getEmail());
+            stmt.setString(3, user.getPassword());
+            stmt.setLong(4, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error creating new user", e);
+        }
+    }
+
     @Override
     public Long insert(User user) {
         String query = "INSERT INTO users(username, email, password) VALUES (?, ?, ?)";
@@ -85,5 +100,7 @@ public class MySQLUsersDao implements Users {
             rs.getString("password")
         );
     }
+
+
 
 }
