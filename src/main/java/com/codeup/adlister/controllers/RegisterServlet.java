@@ -1,6 +1,8 @@
 package com.codeup.adlister.controllers;
 import com.codeup.adlister.dao.DaoFactory;
+import com.codeup.adlister.models.Register;
 import com.codeup.adlister.models.User;
+import com.codeup.adlister.util.Validate;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +16,23 @@ import java.io.IOException;
 @WebServlet(name = "controllers.RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        creates a blank register form that fills the forms in with empty strings
+        Register blankRegister = new Register();
+
+//        sets register attribute to a blank register object if its the first time seeing this form
+        if (request.getSession().getAttribute("register") == null){
+            request.getSession().setAttribute("register", blankRegister);
+        }else{
+//            sets the register attribute to the object that's saved in the session during the post request
+            Register register = (Register) request.getSession().getAttribute("register");
+            request.setAttribute("register", register);
+        }
+
+        if(request.getParameter("error") != null){
+            request.setAttribute("wasAnError", "error");
+        }
         request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -27,12 +45,15 @@ public class RegisterServlet extends HttpServlet {
         // validate input
         boolean inputHasErrors = username.isEmpty()
             || email.isEmpty()
-            || password.isEmpty()
+            || Validate.password(password)
             || (! password.equals(passwordConfirmation));
 
         if (inputHasErrors) {
-            JOptionPane.showMessageDialog(null, "Please fill out all the requested information to register!");
-            response.sendRedirect("/register");
+//            saves the username and email in a register object to the session
+            Register register = new Register(username, email);
+
+            request.getSession().setAttribute("register", register);
+            response.sendRedirect("/register?error=error");
             return;
         }
 
