@@ -34,6 +34,7 @@ public class MySQLUsersDao implements Users {
         }
     }
 
+
     public User findById(Long id) {
         String query = "SELECT * FROM users WHERE id = ? LIMIT 1";
         try {
@@ -43,6 +44,21 @@ public class MySQLUsersDao implements Users {
         } catch (SQLException e) {
             System.out.println("no dice");
             throw new RuntimeException("Error finding a user by username", e);
+        }
+    }
+
+    public void updateProfile(User user, Long id)  {
+String query = "UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getEmail());
+            stmt.setString(3, user.getPassword());
+            stmt.setLong(4, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error creating new user", e);
         }
     }
 
@@ -74,5 +90,7 @@ public class MySQLUsersDao implements Users {
             rs.getString("password")
         );
     }
+
+
 
 }
