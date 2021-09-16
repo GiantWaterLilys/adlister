@@ -1,8 +1,11 @@
 package com.codeup.adlister.util;
 
+
+import com.codeup.adlister.dao.DaoFactory;
+
 public class Validate {
 
-    public static boolean password(String str) {
+    public static boolean passwordIsNotValid(String str) {
         char ch;
         boolean capitalFlag = false;
         boolean lowerCaseFlag = false;
@@ -22,6 +25,15 @@ public class Validate {
                 return false;
         }
         return true;
+    }
+
+    public static boolean emailIsNotValid(String email) {
+        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        return !email.matches(regex);
+    }
+
+    public static boolean usernameIsNotUnique(String username){
+        return DaoFactory.getUsersDao().findByUsername(username) != null;
     }
 
 }

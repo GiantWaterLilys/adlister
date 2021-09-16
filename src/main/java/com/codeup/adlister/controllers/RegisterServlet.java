@@ -41,16 +41,27 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String passwordConfirmation = request.getParameter("confirm_password");
 
+        boolean invalidUser = Validate.usernameIsNotUnique(username);
+        boolean invalidEmail = Validate.emailIsNotValid(email);
+        boolean invalidPassword = Validate.passwordIsNotValid(password);
+        boolean passwordsDontMatch = (!password.equals(passwordConfirmation));
+
 
         // validate input
-        boolean inputHasErrors = username.isEmpty()
-            || email.isEmpty()
-            || Validate.password(password)
-            || (! password.equals(passwordConfirmation));
+        boolean inputHasErrors = invalidUser
+            || invalidEmail
+            || invalidPassword
+            || passwordsDontMatch;
 
         if (inputHasErrors) {
 //            saves the username and email in a register object to the session
             Register register = new Register(username, email);
+
+            request.getSession().setAttribute("invalidUser", invalidUser);
+            request.getSession().setAttribute("invalidEmail", invalidEmail);
+            request.getSession().setAttribute("invalidPassword", invalidPassword);
+            request.getSession().setAttribute("passwordsDontMatch", passwordsDontMatch);
+
 
             request.getSession().setAttribute("register", register);
             response.sendRedirect("/register?error=error");
