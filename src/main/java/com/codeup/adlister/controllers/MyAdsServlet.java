@@ -7,6 +7,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(name = "MyAdsServlet", value = "/MyAdsServlet")
 public class MyAdsServlet extends HttpServlet {
@@ -17,8 +18,12 @@ public class MyAdsServlet extends HttpServlet {
         String password = request.getParameter("password");
         User user = (User) request.getSession().getAttribute("user");
         User user1 = new User(username, email, password);
-        request.setAttribute("ads", DaoFactory.getAdsDao().e
-        request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
+        try {
+            request.setAttribute("userAds", DaoFactory.getAdsDao().getByUser(user.getId()));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        request.getRequestDispatcher("/WEB-INF/ads/my_ads.jsp").forward(request, response);
     }
 
     @Override

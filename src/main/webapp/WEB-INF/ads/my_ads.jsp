@@ -10,9 +10,9 @@
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
 
 <div class="container">
-    <h1>Here Are your ads!</h1>
+    <h1>Here Are your ads</h1>
 
-    <c:forEach var="ad" items="${ads}">
+    <c:forEach var="ad" items="${userAds}">
 
         <div class="col-md-6">
             <h2><a href="http://localhost:8080/ads/ad-info?id=${ad.id}&userid=${ad.userId}">${ad.title}</a></h2>
