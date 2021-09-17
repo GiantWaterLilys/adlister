@@ -30,7 +30,7 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="${pageContext.request.contextPath}/search">&#128269</a></li>
-            <li><a href="${pageContext.request.contextPath}/my_ads">My Ads</a></li>
+            <li><a href="${pageContext.request.contextPath}/MyAdsServlet">My Ads</a></li>
             <li><a href="${pageContext.request.contextPath}/ads/create">Create An Ad</a></li>
             <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
             <li><a href="${pageContext.request.contextPath}/profile">My Profile</a></li>
