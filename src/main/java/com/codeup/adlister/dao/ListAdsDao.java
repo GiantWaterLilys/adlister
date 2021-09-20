@@ -33,6 +33,11 @@ public class ListAdsDao implements Ads {
         return null;
     }
 
+    @Override
+    public List<Ad> findAd(String term) {
+        return null;
+    }
+
 
     private List<Ad> generateAds() {
         List<Ad> ads = new ArrayList<>();

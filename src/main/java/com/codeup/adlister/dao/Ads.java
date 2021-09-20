@@ -12,4 +12,8 @@ public interface Ads {
     Long insert(Ad ad);
 
     Ad search(Long id) throws SQLException;
+
+    List<Ad> findAd(String term);
+
+
 }
