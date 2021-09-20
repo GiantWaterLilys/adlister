@@ -77,6 +77,11 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
+    public List<Ad> getByUser(Long user_id) throws SQLException {
+        return null;
+    }
+
+    @Override
     public List<Ad> findAd(String term) {
         PreparedStatement stmt = null;
         try {

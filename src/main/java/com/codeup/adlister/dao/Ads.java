@@ -13,7 +13,7 @@ public interface Ads {
 
     Ad search(Long id) throws SQLException;
 
-    List<Ad> findAd(String term);
+    List<Ad> getByUser(Long user_id) throws SQLException;
 
-
+    List<Ad> findAd(String term) throws SQLException;
 }
